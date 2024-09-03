@@ -12,17 +12,27 @@ For a demonstration of a line plot on a polar axis, see @fig-polar.
 #| label: fig-polar
 #| fig-cap: "A line plot on a polar axis"
 
-import numpy as np
+# import numpy as np
 import matplotlib.pyplot as plt
+import random
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r);
-ax.set_rticks([0.5, 1, 1.5, 2]);
-ax.grid(True);
+size = 15
+x = range(size)
+y = [random.randint(i * 5, 100) for i in range(size)]
+
+
+
+fig, ax = plt.subplots()
+img = ax.plot(x,y)
+
+# r = np.arange(0, 2, 0.01)
+# theta = 2 * np.pi * r
+# fig, ax = plt.subplots(
+#   subplot_kw = {'projection': 'polar'} 
+# )
+# ax.plot(theta, r);
+# ax.set_rticks([0.5, 1, 1.5, 2]);
+# ax.grid(True);
 plt.show()
 ```
 
