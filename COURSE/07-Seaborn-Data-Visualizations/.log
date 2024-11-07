@@ -1,0 +1,13 @@
+2024-11-07 10:51:46,813 [113885] DEBUG    root:195: [JupyterRequire] Configuration requested: {'paths': {'d3': 'https://d3js.org/d3.v5.min'}, 'shim': {}}
+2024-11-07 10:52:11,023 [113885] ERROR    ipykernel.comm:46: [JupyterRequire] No such comm target registered: jupyter.widget.control
+2024-11-07 10:52:11,029 [113885] WARNING  Comm:246: [JupyterRequire] No such comm: 0df59a87-5463-4b30-82b4-b9e25536a6e8
+2024-11-07 10:52:11,030 [113885] DEBUG    Comm:249: [JupyterRequire] Current comms: []
+2024-11-07 10:52:20,802 [113885] DEBUG    matplotlib:341: [JupyterRequire] matplotlib data path: /home/mic/.pyenv/versions/jupyter_env/lib/python3.10/site-packages/matplotlib/mpl-data
+2024-11-07 10:52:20,816 [113885] DEBUG    matplotlib:341: [JupyterRequire] CONFIGDIR=/home/mic/.config/matplotlib
+2024-11-07 10:52:20,845 [113885] DEBUG    matplotlib:1509: [JupyterRequire] interactive is False
+2024-11-07 10:52:20,846 [113885] DEBUG    matplotlib:1510: [JupyterRequire] platform is linux
+2024-11-07 10:52:20,959 [113885] DEBUG    matplotlib:341: [JupyterRequire] CACHEDIR=/home/mic/.cache/matplotlib
+2024-11-07 10:52:20,990 [113885] DEBUG    matplotlib.font_manager:1580: [JupyterRequire] Using fontManager instance from /home/mic/.cache/matplotlib/fontlist-v390.json
+2024-11-07 10:52:22,153 [113885] DEBUG    root:195: [JupyterRequire] Configuration requested: {'paths': {'d3': 'https://d3js.org/d3.v5.min'}, 'shim': {}}
+2024-11-07 10:52:50,697 [113885] DEBUG    root:195: [JupyterRequire] Configuration requested: {'paths': {'d3': 'https://d3js.org/d3.v5.min'}, 'shim': {}}
+2024-11-07 10:53:03,706 [114772] DEBUG    root:195: [JupyterRequire] Configuration requested: {'paths': {'d3': 'https://d3js.org/d3.v5.min'}, 'shim': {}}
