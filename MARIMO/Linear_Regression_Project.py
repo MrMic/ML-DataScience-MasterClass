@@ -38,6 +38,49 @@ def _(df):
 
 
 @app.cell
+def _(df):
+    df.info()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""**TASK:** Label to predict is the SalesPrice column. Separate Data into X features and y labels.""")
+    return
+
+
+@app.cell
+def _(df):
+    X = df.drop("SalePrice", axis=1)
+    return (X,)
+
+
+@app.cell
+def _(df):
+    y = df["SalePrice"]
+    return (y,)
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+        ###***TASK:***
+        - Use Scikit-learn to split up X and y into trainig set andtest set.
+        - Test proportion to **10%** because we will be using **Grid Search strategy**.
+        - Data split: **_random_state = 101_**
+        """
+    )
+    return
+
+
+@app.cell
+def _():
+    from sklearn.model_selection import train_test_split
+    return (train_test_split,)
+
+
+@app.cell
 def _():
     return
 
