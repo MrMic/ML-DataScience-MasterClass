@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.12.8"
-app = marimo.App(width="medium")
+__generated_with = "0.12.9"
+app = marimo.App(width="full")
 
 
 @app.cell
@@ -78,6 +78,61 @@ def _(mo):
 def _():
     from sklearn.model_selection import train_test_split
     return (train_test_split,)
+
+
+@app.cell
+def _(X, train_test_split, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=101
+    )
+    return X_test, X_train, y_test, y_train
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        """
+        ####***TASK:***
+        - Dataset features has variety of scales & units => Scale X features
+        - Pay attention of what to use for **.fit()** and what to use for **.tranform()**
+        """
+    )
+    return
+
+
+@app.cell
+def _():
+    from sklearn.preprocessing import StandardScaler
+    return (StandardScaler,)
+
+
+@app.cell
+def _(StandardScaler):
+    scaler = StandardScaler()
+    return (scaler,)
+
+
+@app.cell
+def _(X_train, scaler):
+    # scaler.fir(X_train)
+    # scaled_X_train = scaler.transform(X_train)
+    scaled_X_train = scaler.fit_transform(X_train)
+    return (scaled_X_train,)
+
+
+@app.cell
+def _(X_test, scaler):
+    scaled_X_test = scaler.transform(X_test)
+    return (scaled_X_test,)
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ###***Test:***
+    - Use of Elastic Net model
+    """)
+    return
 
 
 @app.cell
