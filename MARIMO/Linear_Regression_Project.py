@@ -1,19 +1,25 @@
 import marimo
 
-__generated_with = "0.12.9"
+__generated_with = "0.12.10"
 app = marimo.App(width="full")
-
-
-@app.cell
-def _(mo):
-    mo.md(r"""## CROSS VALIDATION PROJECT **-= EXERCISE =-**""")
-    return
 
 
 @app.cell
 def _():
     import marimo as mo
     return (mo,)
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+        mo.md(\"""
+        ## CROSS VALIDATION PROJECT **-= EXERCISE =-**
+        \""")
+        """
+    )
+    return
 
 
 @app.cell
@@ -128,11 +134,101 @@ def _(X_test, scaler):
 
 @app.cell
 def _(mo):
-    mo.md("""
-    ###***Test:***
-    - Use of Elastic Net model
-    """)
+    mo.md(
+        """
+        ###***Task:***
+        - Use of Elastic Net model
+        """
+    )
     return
+
+
+@app.cell
+def _():
+    from sklearn.linear_model import ElasticNet
+    return (ElasticNet,)
+
+
+@app.cell
+def _(ElasticNet):
+    base_elastic_model = ElasticNet(max_iter=500000)
+    return (base_elastic_model,)
+
+
+@app.cell
+def _():
+    param_grid = {"alpha": [0.1, 1, 5, 100, 100], "l1_ratio": [0.1, 0.7, 0.99, 1]}
+    return (param_grid,)
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        """
+        ###***Task:***
+        - Use Scikit-lean to create GridSearchCV & run a grid search for the best 
+        parameters for your model based on your scaled training data.
+        """
+    )
+    return
+
+
+@app.cell
+def _():
+    from sklearn.model_selection import GridSearchCV
+    return (GridSearchCV,)
+
+
+@app.cell
+def _(GridSearchCV, base_elastic_model, param_grid):
+    grid_model = GridSearchCV(
+        estimator=base_elastic_model,
+        param_grid=param_grid,
+        scoring="neg_mean_squared_error",
+        cv=5,
+        verbose=1,
+    )
+    return (grid_model,)
+
+
+@app.cell
+def _(grid_model, scaled_X_train, y_train):
+    grid_model.fit(X=scaled_X_train, y=y_train)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        """
+        ###***Task:***
+        - Display the best combination of parameters for your model
+        """
+    )
+    return
+
+
+@app.cell
+def _(grid_model):
+    grid_model.best_params_
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        """
+        ###***Task:***
+        - Evaluate your model performance on the unseen 10% scaled test set.
+        """
+    )
+    return
+
+
+@app.cell
+def _(grid_model, scaled_X_test):
+    y_pred = grid_model.predict(scaled_X_test)
+    return (y_pred,)
 
 
 @app.cell
