@@ -1,0 +1,34 @@
+[project]
+name = "13-logistic-regression"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10.2"
+dependencies = [
+    "marimo[lsp,recommanded,recommended]>=0.13.2",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.11.7"]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "B", # flake8-bugbear
+]
+
+# Language server configuration
+[tool.marimo.language_servers.pylsp]
+enabled = true            # Enable/disable the Python language server
+enable_mypy = true        # Type checking with mypy (enabled by default, if installed)
+enable_ruff = true        # Linting with ruff (enabled by default, if installed)
+enable_flake8 = false     # Linting with flake8
+enable_pydocstyle = false # Check docstring style
+enable_pylint = false     # Linting with pylint
+enable_pyflakes = false   # Syntax checking with pyflakes
+
+# Diagnostics configuration
+[tool.marimo.diagnostics]
+enabled = true # Show diagnostics in the editor
