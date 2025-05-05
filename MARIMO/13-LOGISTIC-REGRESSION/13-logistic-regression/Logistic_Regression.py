@@ -102,6 +102,98 @@ def _(df, plt):
 
 
 @app.cell
+def _(df):
+    df.head()
+    return
+
+
+@app.cell
+def _(df):
+    X = df.drop("test_result", axis=1)
+    return (X,)
+
+
+@app.cell
+def _(df):
+    y = df["test_result"]
+    return (y,)
+
+
+@app.cell
+def _():
+    from sklearn.model_selection import train_test_split
+    return (train_test_split,)
+
+
+@app.cell
+def _():
+    from sklearn.preprocessing import StandardScaler
+    return (StandardScaler,)
+
+
+@app.cell
+def _(X, train_test_split, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=101
+    )
+    return X_test, X_train, y_train
+
+
+@app.cell
+def _(StandardScaler):
+    scaler = StandardScaler()
+    return (scaler,)
+
+
+@app.cell
+def _(X_train, scaler):
+    scaled_X_train = scaler.fit_transform(X_train)
+    return (scaled_X_train,)
+
+
+@app.cell
+def _(X_test, scaler):
+    scaled_X_test = scaler.transform(X_test)
+    return (scaled_X_test,)
+
+
+@app.cell
+def _():
+    from sklearn.linear_model import LogisticRegression
+    return (LogisticRegression,)
+
+
+@app.cell
+def _(LogisticRegression):
+    log_model = LogisticRegression()
+    return (log_model,)
+
+
+@app.cell
+def _(log_model, scaled_X_train, y_train):
+    log_model.fit(scaled_X_train, y_train)
+    return
+
+
+@app.cell
+def _(log_model):
+    log_model.coef_
+    return
+
+
+@app.cell
+def _(log_model, scaled_X_test):
+    y_pred = log_model.predict_proba(scaled_X_test)
+    return (y_pred,)
+
+
+@app.cell
+def _(y_pred):
+    y_pred
+    return
+
+
+@app.cell
 def _():
     return
 
