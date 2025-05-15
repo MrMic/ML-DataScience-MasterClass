@@ -5,7 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10.2"
 dependencies = [
-    "marimo[lsp,recommanded,recommended]>=0.13.2",
+    "marimo[lsp,recommended]>=0.13.6",
+    "wakatime>=14.0.1",
 ]
 
 [dependency-groups]
@@ -18,6 +19,10 @@ select = [
     "I", # isort
     "B", # flake8-bugbear
 ]
+
+# LSP configuration
+[tool.marimo.experimental]
+lsp = true
 
 # Language server configuration
 [tool.marimo.language_servers.pylsp]

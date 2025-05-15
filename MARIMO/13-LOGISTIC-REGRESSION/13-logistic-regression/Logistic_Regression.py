@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.4"
+__generated_with = "0.13.8"
 app = marimo.App(width="full")
 
 
@@ -98,7 +98,7 @@ def _(df, plt):
     ax.scatter(
         df["age"], df["physical_score"], df["test_result"], c=df["test_result"]
     )
-    return
+    return (ax,)
 
 
 @app.cell
@@ -136,7 +136,7 @@ def _(X, train_test_split, y):
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.1, random_state=101
     )
-    return X_test, X_train, y_train
+    return X_test, X_train, y_test, y_train
 
 
 @app.cell
@@ -183,13 +183,136 @@ def _(log_model):
 
 @app.cell
 def _(log_model, scaled_X_test):
-    y_pred = log_model.predict_proba(scaled_X_test)
+    y_pred = log_model.predict(scaled_X_test)
     return (y_pred,)
 
 
 @app.cell
 def _(y_pred):
     y_pred
+    return
+
+
+@app.cell
+def _(df):
+    df.head()
+    return
+
+
+@app.cell
+def _():
+    from sklearn.metrics import (
+        accuracy_score,
+        confusion_matrix,
+        classification_report,
+    )
+    return accuracy_score, classification_report, confusion_matrix
+
+
+@app.cell
+def _(confusion_matrix, y_pred, y_test):
+    confusion_matrix(y_test, y_pred)
+    return
+
+
+@app.cell
+def _(accuracy_score, y_pred, y_test):
+    accuracy_score(y_test, y_pred)
+    return
+
+
+@app.cell
+def _():
+    from sklearn.metrics import ConfusionMatrixDisplay
+    return (ConfusionMatrixDisplay,)
+
+
+@app.cell
+def _(ConfusionMatrixDisplay, confusion_matrix, plt, y_pred, y_test):
+    # Assuming y_true and y_pred are your actual and predicted labels
+    # cm = confusion_matrix(y_test, y_pred,normalize="all")
+    cm = confusion_matrix(y_test, y_pred)
+    disp = ConfusionMatrixDisplay(
+        confusion_matrix=cm,
+    )
+    disp.plot()
+    plt.show()
+    return
+
+
+@app.cell
+def _(y_test):
+    len(y_test)
+    return
+
+
+@app.cell
+def _(classification_report, y_pred, y_test):
+    print(classification_report(y_pred=y_test, y_true=y_pred))
+    return
+
+
+@app.cell
+def _():
+    from sklearn.metrics import precision_score, recall_score
+    return precision_score, recall_score
+
+
+@app.cell
+def _(precision_score, y_pred, y_test):
+    precision_score(y_test, y_pred=y_pred)
+    return
+
+
+@app.cell
+def _(recall_score, y_pred, y_test):
+    recall_score(y_true=y_test, y_pred=y_pred)
+    return
+
+
+@app.cell
+def _():
+    from sklearn.metrics import PrecisionRecallDisplay, RocCurveDisplay
+    return PrecisionRecallDisplay, RocCurveDisplay
+
+
+@app.cell
+def _(RocCurveDisplay, ax, log_model, plt, scaled_X_test, y_test):
+    fig2, ax2 = plt.subplots(figsize=(6, 4))
+
+    # First curve
+    display1 = RocCurveDisplay.from_estimator(
+        log_model, scaled_X_test, y_test, name="Model 'log_model'", ax=ax2
+    )
+
+    ax.set_title("ROC Curves")
+    plt.show()
+    return
+
+
+@app.cell
+def _(PrecisionRecallDisplay, ax, log_model, plt, scaled_X_test, y_test):
+    fig3, ax3 = plt.subplots(figsize=(12, 6))
+
+    # First curve
+    display2 = PrecisionRecallDisplay.from_estimator(
+        log_model, scaled_X_test, y_test, name="Model 'log_model'", ax=ax3
+    )
+
+    ax.set_title("ROC Curves")
+    plt.show()
+    return
+
+
+@app.cell
+def _(log_model, scaled_X_test):
+    log_model.predict_proba(scaled_X_test)[0]
+    return
+
+
+@app.cell
+def _(y_test):
+    y_test[0]
     return
 
 
