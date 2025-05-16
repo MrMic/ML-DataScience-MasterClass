@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.9"
+__generated_with = "0.13.10"
 app = marimo.App(width="full")
 
 
@@ -64,8 +64,52 @@ def _(df, sns):
 @app.cell
 def _(df, sns):
     # Calculate correlation only on numeric columns
-    numeric_df = df.drop("species", axis=1)
-    sns.heatmap(numeric_df.corr(), annot=True)
+    X = df.drop("species", axis=1)
+    sns.heatmap(X.corr(), annot=True)
+    return (X,)
+
+
+@app.cell
+def _(df):
+    y = df["species"]
+    return (y,)
+
+
+@app.cell
+def _():
+    from sklearn.model_selection import train_test_split
+    return (train_test_split,)
+
+
+@app.cell
+def _():
+    from sklearn.preprocessing import StandardScaler
+    return (StandardScaler,)
+
+
+@app.cell
+def _(X, train_test_split, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.25, random_state=101
+    )
+    return X_test, X_train
+
+
+@app.cell
+def _(StandardScaler):
+    scaler = StandardScaler()
+    return (scaler,)
+
+
+@app.cell
+def _(X_train, scaler):
+    scaled_X_train = scaler.fit_transform(X_train)
+    return
+
+
+@app.cell
+def _(X_test, scaler):
+    scaled_X_test = scaler.fit_transform(X_test)
     return
 
 
